@@ -5,7 +5,7 @@
   "type": "module",
   "description": "言行 V0 响应式 Web 与 PWA",
   "engines": {
-    "node": ">=24.0.0 <25"
+    "node": ">=22.0.0 <25"
   },
   "packageManager": "npm@11.17.0",
   "scripts": {
