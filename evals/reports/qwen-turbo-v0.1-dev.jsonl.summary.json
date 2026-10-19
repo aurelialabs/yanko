@@ -1,0 +1,18 @@
+{
+  "runId": "eval-0d4fc1e30e75ebb5",
+  "dataset": "dataset.snapshot.json",
+  "adapter": {
+    "id": "taoke-tag-ai-candidate-1",
+    "providerId": "alibaba-cloud-dashscope",
+    "modelId": "qwen-turbo"
+  },
+  "datasetFingerprint": "119c857b08aa1aece0cc8fd3941595485459f2398fadfb8ca60ac8f8687ac49d",
+  "promptVersion": "yanxing-eval-v0.1",
+  "policyVersion": "v0.1",
+  "split": "dev",
+  "totalCases": 32,
+  "completedCases": 32,
+  "failedCases": 0,
+  "scoring": "not-run",
+  "note": "This artifact records one candidate run. It does not rank providers or select a production model."
+}

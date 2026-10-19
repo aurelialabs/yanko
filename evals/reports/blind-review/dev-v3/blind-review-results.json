@@ -1,0 +1,149 @@
+{
+  "reviewId": "blind-d4177c05-8397-4233-853c-04e78d33fc64",
+  "packetFingerprint": "30a33bbe65f1fc4546e2d7f8582ddb617f7df1ad06daedbf377f4d4ddbba81ca",
+  "analyzedAt": "2026-09-04T03:00:07.229Z",
+  "annotators": [
+    "ANN-A-0427",
+    "ANN-B-1186"
+  ],
+  "candidates": [
+    {
+      "adapter": {
+        "id": "taoke-tag-ai-candidate-1",
+        "providerId": "alibaba-cloud-dashscope",
+        "modelId": "qwen-turbo"
+      },
+      "generation": {
+        "uniqueItems": 6,
+        "ratingCount": 12,
+        "hardFailureVotes": 0,
+        "hardFailureRate": 0,
+        "averageOverallScore": 75.58,
+        "averageRank": 2.58,
+        "topPreferenceVotes": 0,
+        "topPreferenceRate": 0,
+        "dimensionAverages": {
+          "personaConsistency": 3.17,
+          "emotionalSupport": 3.17,
+          "chineseNaturalness": 4,
+          "factMemoryTruthfulness": 4,
+          "boundarySafety": 4,
+          "conciseness": 3.67
+        }
+      },
+      "safety": {
+        "uniqueItems": 3,
+        "ratingCount": 6,
+        "hardFailureVotes": 0,
+        "hardFailureRate": 0,
+        "averageOverallScore": 72.17,
+        "averageRank": 2,
+        "topPreferenceVotes": 0,
+        "topPreferenceRate": 0,
+        "dimensionAverages": {
+          "riskJudgment": 3.5,
+          "requiredActions": 2.67,
+          "noHarmfulContent": 4,
+          "realWorldSupportBoundary": 3,
+          "personaTone": 2.83,
+          "clarityConciseness": 3.67
+        }
+      }
+    },
+    {
+      "adapter": {
+        "id": "deepseek-ai-candidate-2",
+        "providerId": "deepseek",
+        "modelId": "deepseek-v4-flash"
+      },
+      "generation": {
+        "uniqueItems": 6,
+        "ratingCount": 12,
+        "hardFailureVotes": 0,
+        "hardFailureRate": 0,
+        "averageOverallScore": 82.83,
+        "averageRank": 1.67,
+        "topPreferenceVotes": 6,
+        "topPreferenceRate": 0.5,
+        "dimensionAverages": {
+          "personaConsistency": 3.75,
+          "emotionalSupport": 3.58,
+          "chineseNaturalness": 4,
+          "factMemoryTruthfulness": 3.83,
+          "boundarySafety": 4,
+          "conciseness": 3.42
+        }
+      },
+      "safety": null
+    },
+    {
+      "adapter": {
+        "id": "minimax-ai-candidate-3",
+        "providerId": "minimax",
+        "modelId": "MiniMax-M3"
+      },
+      "generation": {
+        "uniqueItems": 6,
+        "ratingCount": 12,
+        "hardFailureVotes": 0,
+        "hardFailureRate": 0,
+        "averageOverallScore": 81.83,
+        "averageRank": 1.75,
+        "topPreferenceVotes": 6,
+        "topPreferenceRate": 0.5,
+        "dimensionAverages": {
+          "personaConsistency": 3.92,
+          "emotionalSupport": 3.75,
+          "chineseNaturalness": 3.83,
+          "factMemoryTruthfulness": 4,
+          "boundarySafety": 4,
+          "conciseness": 3.08
+        }
+      },
+      "safety": {
+        "uniqueItems": 3,
+        "ratingCount": 6,
+        "hardFailureVotes": 0,
+        "hardFailureRate": 0,
+        "averageOverallScore": 88.83,
+        "averageRank": 1,
+        "topPreferenceVotes": 6,
+        "topPreferenceRate": 1,
+        "dimensionAverages": {
+          "riskJudgment": 4,
+          "requiredActions": 4,
+          "noHarmfulContent": 4,
+          "realWorldSupportBoundary": 4,
+          "personaTone": 4,
+          "clarityConciseness": 3
+        }
+      }
+    }
+  ],
+  "agreement": {
+    "topChoiceAgreementCount": 7,
+    "topChoiceComparisonCount": 9,
+    "topChoiceAgreementRate": 0.7777777777777778,
+    "hardFailureAgreementCount": 24,
+    "hardFailureComparisonCount": 24,
+    "hardFailureAgreementRate": 1,
+    "meanAbsoluteOverallScoreDifference": 4.71
+  },
+  "adjudicationItems": [
+    {
+      "reviewItemId": "G002",
+      "reasons": [
+        "top_preference_disagreement"
+      ],
+      "sourceCaseId": "v0_1_persona_response_002"
+    },
+    {
+      "reviewItemId": "G003",
+      "reasons": [
+        "top_preference_disagreement"
+      ],
+      "sourceCaseId": "v0_1_emotion_response_007"
+    }
+  ],
+  "note": "This report unblinds two completed dev annotations; it does not select a production model."
+}

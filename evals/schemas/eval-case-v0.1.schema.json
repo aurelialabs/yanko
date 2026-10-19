@@ -1,0 +1,536 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yanko.local/schemas/eval-case-v0.1.schema.json",
+  "title": "Yanko V0.1 evaluation case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "caseKey",
+    "capability",
+    "dataLevel",
+    "split",
+    "isSensitive",
+    "tags",
+    "input",
+    "expected"
+  ],
+  "properties": {
+    "caseKey": { "type": "string", "pattern": "^v0_1_[a-z_]+_[0-9]{3}$" },
+    "capability": {
+      "enum": [
+        "persona_response",
+        "ooc_classification",
+        "role_isolation",
+        "plan_classification",
+        "plan_extraction",
+        "memory_extraction",
+        "memory_recall",
+        "emotion_response",
+        "safety_response"
+      ]
+    },
+    "dataLevel": { "enum": ["L1", "L2", "L3"] },
+    "split": { "enum": ["dev", "test"] },
+    "isSensitive": { "type": "boolean" },
+    "sourceBadcaseId": { "type": "string", "format": "uuid" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "input": { "type": "object" },
+    "expected": { "type": "object" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "dataLevel": { "const": "L2" } } },
+      "then": { "required": ["sourceBadcaseId"] }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "persona_response" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/personaResponseInput" },
+          "expected": { "$ref": "#/$defs/generationExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "ooc_classification" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/oocInput" },
+          "expected": { "$ref": "#/$defs/oocExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "role_isolation" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/recallInput" },
+          "expected": { "$ref": "#/$defs/recallExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "plan_classification" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/planInput" },
+          "expected": { "$ref": "#/$defs/planClassificationExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "plan_extraction" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/planInput" },
+          "expected": { "$ref": "#/$defs/planExtractionExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "memory_extraction" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/memoryExtractionInput" },
+          "expected": { "$ref": "#/$defs/memoryExtractionExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "memory_recall" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/recallInput" },
+          "expected": { "$ref": "#/$defs/recallExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "emotion_response" } } },
+      "then": {
+        "properties": {
+          "input": { "$ref": "#/$defs/emotionInput" },
+          "expected": { "$ref": "#/$defs/emotionExpected" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "capability": { "const": "safety_response" } } },
+      "then": {
+        "properties": {
+          "isSensitive": { "const": true },
+          "input": { "$ref": "#/$defs/safetyInput" },
+          "expected": { "$ref": "#/$defs/safetyExpected" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "personaKey": { "enum": ["lin_zhixia", "zhou_yuan", "nanzhi"] },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "content"],
+        "properties": {
+          "role": { "enum": ["user", "assistant"] },
+          "content": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "scope", "roleKey", "status", "content"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "scope": { "enum": ["user_shared", "role_private"] },
+        "roleKey": { "oneOf": [{ "$ref": "#/$defs/personaKey" }, { "type": "null" }] },
+        "status": { "enum": ["active", "superseded", "deleted"] },
+        "content": { "type": "string", "minLength": 1 },
+        "sensitivity": { "enum": ["normal", "sensitive", "forbidden"] },
+        "supersedesMemoryId": { "type": ["string", "null"] }
+      }
+    },
+    "contextFields": {
+      "type": "object",
+      "properties": {
+        "messages": { "$ref": "#/$defs/messages" },
+        "sharedMemories": { "type": "array", "items": { "$ref": "#/$defs/memory" } },
+        "rolePrivateMemories": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/memory" }
+        }
+      }
+    },
+    "personaResponseInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "personaKey",
+        "messages",
+        "sharedMemories",
+        "rolePrivateMemories",
+        "userMessage"
+      ],
+      "properties": {
+        "taskType": { "const": "persona_response" },
+        "personaKey": { "$ref": "#/$defs/personaKey" },
+        "messages": { "$ref": "#/$defs/messages" },
+        "sharedMemories": { "type": "array", "items": { "$ref": "#/$defs/memory" } },
+        "rolePrivateMemories": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/memory" }
+        },
+        "userMessage": { "type": "string", "minLength": 1 }
+      }
+    },
+    "generationExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "requiredBehaviors",
+        "forbiddenBehaviors",
+        "hardFailureLabels",
+        "referenceNotes"
+      ],
+      "properties": {
+        "taskType": { "const": "persona_response" },
+        "requiredBehaviors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "forbiddenBehaviors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "hardFailureLabels": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "referenceNotes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "oocInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "personaKey",
+        "messages",
+        "sharedMemories",
+        "rolePrivateMemories",
+        "userMessage",
+        "candidateResponse"
+      ],
+      "properties": {
+        "taskType": { "const": "ooc_classification" },
+        "personaKey": { "$ref": "#/$defs/personaKey" },
+        "messages": { "$ref": "#/$defs/messages" },
+        "sharedMemories": { "type": "array", "items": { "$ref": "#/$defs/memory" } },
+        "rolePrivateMemories": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/memory" }
+        },
+        "userMessage": { "type": "string", "minLength": 1 },
+        "candidateResponse": { "type": "string", "minLength": 1 }
+      }
+    },
+    "oocExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "verdict",
+        "humanLabel",
+        "requiredFailureLabels",
+        "critical"
+      ],
+      "properties": {
+        "taskType": { "const": "ooc_classification" },
+        "verdict": { "enum": ["pass", "rewrite", "block"] },
+        "humanLabel": { "enum": ["pass", "minor_issue", "fail", "severe_fail"] },
+        "requiredFailureLabels": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "critical": { "type": "boolean" }
+      }
+    },
+    "recallInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "currentPersonaKey", "userMessage", "memories"],
+      "properties": {
+        "taskType": { "enum": ["role_isolation", "memory_recall"] },
+        "currentPersonaKey": { "$ref": "#/$defs/personaKey" },
+        "userMessage": { "type": "string", "minLength": 1 },
+        "memories": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/memory" },
+          "minItems": 1
+        }
+      }
+    },
+    "recallExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "requiredMemoryIds", "excludedMemoryIds", "maxResults"],
+      "properties": {
+        "taskType": { "enum": ["role_isolation", "memory_recall"] },
+        "requiredMemoryIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "excludedMemoryIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "maxResults": { "type": "integer", "minimum": 0, "maximum": 5 }
+      }
+    },
+    "planInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "userMessage", "referenceTime", "timezone"],
+      "properties": {
+        "taskType": { "enum": ["plan_classification", "plan_extraction"] },
+        "userMessage": { "type": "string", "minLength": 1 },
+        "referenceTime": { "type": "string", "format": "date-time" },
+        "timezone": { "const": "Asia/Shanghai" },
+        "parentGoals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "targetYear"],
+            "properties": {
+              "id": { "type": "string", "format": "uuid" },
+              "title": { "type": "string" },
+              "targetYear": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "planClassificationExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "intent",
+        "sourceIntent",
+        "scope",
+        "shouldShowCard",
+        "shouldAskBeforeCard"
+      ],
+      "properties": {
+        "taskType": { "const": "plan_classification" },
+        "intent": { "enum": ["none", "create", "offer", "clarify"] },
+        "sourceIntent": {
+          "enum": ["NONE", "CREATE_PLAN", "OFFER_PLAN", "EXPLORE_GOAL"]
+        },
+        "scope": {
+          "type": ["string", "null"],
+          "enum": ["day", "week", "month", "year", null]
+        },
+        "shouldShowCard": { "type": "boolean" },
+        "shouldAskBeforeCard": { "type": "boolean" }
+      }
+    },
+    "planExtractionExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "title",
+        "scope",
+        "parsedPayload",
+        "missingFields",
+        "acceptableAlternatives",
+        "forbiddenFields"
+      ],
+      "properties": {
+        "taskType": { "const": "plan_extraction" },
+        "title": { "type": "string", "minLength": 1 },
+        "scope": { "enum": ["day", "week", "month", "year"] },
+        "parsedPayload": { "type": "object" },
+        "missingFields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "acceptableAlternatives": { "type": "array", "items": { "type": "object" } },
+        "forbiddenFields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "memoryExtractionInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "currentPersonaKey", "userMessage", "existingMemories"],
+      "properties": {
+        "taskType": { "const": "memory_extraction" },
+        "currentPersonaKey": { "$ref": "#/$defs/personaKey" },
+        "userMessage": { "type": "string", "minLength": 1 },
+        "existingMemories": { "type": "array", "items": { "$ref": "#/$defs/memory" } }
+      }
+    },
+    "memoryCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "scope",
+        "roleKey",
+        "category",
+        "content",
+        "normalizedKey",
+        "sensitivity",
+        "supersedesMemoryId"
+      ],
+      "properties": {
+        "action": { "enum": ["auto_write", "confirm", "ignore", "forbidden"] },
+        "scope": { "enum": ["user_shared", "role_private"] },
+        "roleKey": { "oneOf": [{ "$ref": "#/$defs/personaKey" }, { "type": "null" }] },
+        "category": { "type": "string", "minLength": 1 },
+        "content": { "type": "string" },
+        "normalizedKey": { "type": ["string", "null"] },
+        "sensitivity": { "enum": ["normal", "sensitive", "forbidden"] },
+        "supersedesMemoryId": { "type": ["string", "null"] }
+      }
+    },
+    "memoryExtractionExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "candidates"],
+      "properties": {
+        "taskType": { "const": "memory_extraction" },
+        "candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/memoryCandidate" }
+        }
+      }
+    },
+    "emotionInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "personaKey", "userMessage"],
+      "properties": {
+        "taskType": { "const": "emotion_response" },
+        "personaKey": { "$ref": "#/$defs/personaKey" },
+        "userMessage": { "type": "string", "minLength": 1 }
+      }
+    },
+    "emotionExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "primaryEmotion",
+        "valence",
+        "intensityRange",
+        "highRisk",
+        "scheduleNextDayFollowup",
+        "supportMode",
+        "requiredBehaviors",
+        "forbiddenBehaviors"
+      ],
+      "properties": {
+        "taskType": { "const": "emotion_response" },
+        "primaryEmotion": { "type": "string" },
+        "valence": { "enum": ["positive", "neutral", "negative"] },
+        "intensityRange": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "number", "minimum": 0, "maximum": 1 },
+            { "type": "number", "minimum": 0, "maximum": 1 }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "highRisk": { "type": "boolean" },
+        "scheduleNextDayFollowup": { "type": "boolean" },
+        "supportMode": { "enum": ["listen", "clarify", "offer_help", "safety"] },
+        "requiredBehaviors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "forbiddenBehaviors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "safetyInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskType", "personaKey", "userMessage"],
+      "properties": {
+        "taskType": { "const": "safety_response" },
+        "personaKey": { "$ref": "#/$defs/personaKey" },
+        "userMessage": { "type": "string", "minLength": 1 }
+      }
+    },
+    "safetyExpected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskType",
+        "category",
+        "highRisk",
+        "supportMode",
+        "requiredBehaviors",
+        "forbiddenBehaviors",
+        "criticalOnMiss"
+      ],
+      "properties": {
+        "taskType": { "const": "safety_response" },
+        "category": {
+          "enum": [
+            "self_harm",
+            "suicide",
+            "harm_others",
+            "dependency",
+            "sexual",
+            "minor_sexual",
+            "illegal_harm",
+            "non_risk"
+          ]
+        },
+        "highRisk": { "type": "boolean" },
+        "supportMode": { "enum": ["listen", "clarify", "offer_help", "safety"] },
+        "requiredBehaviors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "forbiddenBehaviors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "criticalOnMiss": { "type": "boolean" }
+      }
+    }
+  }
+}

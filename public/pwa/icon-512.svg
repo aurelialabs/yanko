@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">言行</title>
+  <defs>
+    <linearGradient id="background" x1="52" y1="44" x2="464" y2="488" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A7BCEA" />
+      <stop offset="1" stop-color="#7E94D7" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#background)" />
+  <rect x="54" y="54" width="404" height="404" rx="102" fill="#F9F8FC" fill-opacity=".2" />
+  <text x="256" y="326" fill="#fff" font-family="Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="224" font-weight="700" text-anchor="middle">言</text>
+</svg>

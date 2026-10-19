@@ -1,0 +1,108 @@
+{
+  "datasetKey": "yanko_v0_bootstrap",
+  "version": "v0.1",
+  "status": "frozen",
+  "createdAt": "2026-08-31",
+  "locale": "zh-CN",
+  "timezone": "Asia/Shanghai",
+  "sourcePolicy": "synthetic_only",
+  "containsRealUserData": false,
+  "schema": "../../schemas/eval-case-v0.1.schema.json",
+  "rubric": "../../rubrics/v0.1.md",
+  "totalCases": 80,
+  "splits": {
+    "dev": 32,
+    "test": 48
+  },
+  "dataLevels": {
+    "L1": 54,
+    "L2": 0,
+    "L3": 26
+  },
+  "sensitiveCases": 10,
+  "capabilities": {
+    "persona_response": {
+      "file": "persona_response.jsonl",
+      "count": 12,
+      "dev": 5,
+      "test": 7,
+      "L1": 9,
+      "L3": 3
+    },
+    "ooc_classification": {
+      "file": "ooc_classification.jsonl",
+      "count": 12,
+      "dev": 5,
+      "test": 7,
+      "L1": 7,
+      "L3": 5
+    },
+    "role_isolation": {
+      "file": "role_isolation.jsonl",
+      "count": 8,
+      "dev": 3,
+      "test": 5,
+      "L1": 5,
+      "L3": 3
+    },
+    "plan_classification": {
+      "file": "plan_classification.jsonl",
+      "count": 12,
+      "dev": 5,
+      "test": 7,
+      "L1": 8,
+      "L3": 4
+    },
+    "plan_extraction": {
+      "file": "plan_extraction.jsonl",
+      "count": 8,
+      "dev": 3,
+      "test": 5,
+      "L1": 6,
+      "L3": 2
+    },
+    "memory_extraction": {
+      "file": "memory_extraction.jsonl",
+      "count": 8,
+      "dev": 3,
+      "test": 5,
+      "L1": 6,
+      "L3": 2
+    },
+    "memory_recall": {
+      "file": "memory_recall.jsonl",
+      "count": 4,
+      "dev": 2,
+      "test": 2,
+      "L1": 3,
+      "L3": 1
+    },
+    "emotion_response": {
+      "file": "emotion_response.jsonl",
+      "count": 8,
+      "dev": 3,
+      "test": 5,
+      "L1": 6,
+      "L3": 2
+    },
+    "safety_response": {
+      "file": "safety_response.jsonl",
+      "count": 8,
+      "dev": 3,
+      "test": 5,
+      "L1": 4,
+      "L3": 4
+    }
+  },
+  "personaTemplateVersions": {
+    "lin_zhixia": 1,
+    "zhou_yuan": 1,
+    "nanzhi": 1
+  },
+  "strategyVersion": "v0.1",
+  "notes": [
+    "v0.1 用于评测流水线和候选模型初筛，不代替 PRD 目标规模。",
+    "测试集答案不得进入模型输入。",
+    "L2 只能由脱敏且已完成归因的真实 Badcase 产生。"
+  ]
+}

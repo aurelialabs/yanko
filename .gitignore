@@ -1,1 +1,39 @@
+# dependencies
 node_modules/
+
+# Next.js
+.next/
+.next-e2e/
+.next-local-e2e/
+.next-minimax-e2e/
+out/
+
+# tests
+coverage/
+playwright-report/
+test-results/
+
+# local environments and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+*.blind-map.local.json
+
+# Supabase local state
+supabase/.branches/
+supabase/.temp/
+
+# editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# logs
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts

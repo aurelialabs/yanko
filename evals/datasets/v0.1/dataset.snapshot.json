@@ -1,0 +1,54 @@
+{
+  "datasetKey": "yanko_v0_bootstrap",
+  "version": "v0.1",
+  "generatedAt": "2026-08-31T00:00:00+08:00",
+  "sha256": "119c857b08aa1aece0cc8fd3941595485459f2398fadfb8ca60ac8f8687ac49d",
+  "totalCases": 80,
+  "files": [
+    {
+      "file": "persona_response.jsonl",
+      "sha256": "8f70a40e9bb6e5b96991db736d1d4986a2ed8bfafceecaea97998ffca397082f",
+      "cases": 12
+    },
+    {
+      "file": "ooc_classification.jsonl",
+      "sha256": "8cea94982391d5e6a4923887253215fd3a78abfd3a84df5b189f04c3f9463234",
+      "cases": 12
+    },
+    {
+      "file": "role_isolation.jsonl",
+      "sha256": "f2dc60bd1bc4d6eeef8b181339956282fc3c18a50860e25ab5820a2790f50093",
+      "cases": 8
+    },
+    {
+      "file": "plan_classification.jsonl",
+      "sha256": "e0b6569b7f589ac1766b31537bf8821e3eecb1ae19c85feb6542dd7f0dd9e591",
+      "cases": 12
+    },
+    {
+      "file": "plan_extraction.jsonl",
+      "sha256": "770b53d9a461ef65c59bcda96d2dae35ae9797cb7166c80f1dd24769f1490b15",
+      "cases": 8
+    },
+    {
+      "file": "memory_extraction.jsonl",
+      "sha256": "c801d2327788bbdd621d0df1dbadf28a3d34f7806dc54e164eb1736a7fa68145",
+      "cases": 8
+    },
+    {
+      "file": "memory_recall.jsonl",
+      "sha256": "1758608473606bab6c0434f3b1ce9a1b1bc509ee5c085f5c586008a318120b56",
+      "cases": 4
+    },
+    {
+      "file": "emotion_response.jsonl",
+      "sha256": "59e569c06f90e03d6f111a5ff2a36730e4573a2c7c1c1204c72bfd95c1d72d75",
+      "cases": 8
+    },
+    {
+      "file": "safety_response.jsonl",
+      "sha256": "49f4fa32f767daaed38d8f5fae5757be33f6448c9a6673c9f107bdd7b61cfa79",
+      "cases": 8
+    }
+  ]
+}

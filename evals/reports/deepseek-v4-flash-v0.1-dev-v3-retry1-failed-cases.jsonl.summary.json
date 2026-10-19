@@ -1,0 +1,27 @@
+{
+  "runId": "eval-96c340b3c7d39b2a",
+  "dataset": "dataset.snapshot.json",
+  "adapter": {
+    "id": "deepseek-ai-candidate-2",
+    "providerId": "deepseek",
+    "modelId": "deepseek-v4-flash"
+  },
+  "datasetFingerprint": "119c857b08aa1aece0cc8fd3941595485459f2398fadfb8ca60ac8f8687ac49d",
+  "promptVersion": "yanxing-eval-v0.3",
+  "policyVersion": "v0.2",
+  "split": "dev",
+  "selectedCaseIds": [
+    "v0_1_plan_classification_001",
+    "v0_1_plan_extraction_003",
+    "v0_1_plan_extraction_006",
+    "v0_1_emotion_response_003",
+    "v0_1_safety_response_001",
+    "v0_1_safety_response_004",
+    "v0_1_safety_response_005"
+  ],
+  "totalCases": 7,
+  "completedCases": 5,
+  "failedCases": 2,
+  "scoring": "not-run",
+  "note": "This artifact records one candidate run. It does not rank providers or select a production model."
+}

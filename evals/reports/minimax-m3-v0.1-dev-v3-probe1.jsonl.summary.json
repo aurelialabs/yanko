@@ -1,0 +1,21 @@
+{
+  "runId": "eval-f199a0bbf7eb9058",
+  "dataset": "dataset.snapshot.json",
+  "adapter": {
+    "id": "minimax-ai-candidate-3",
+    "providerId": "minimax",
+    "modelId": "MiniMax-M3"
+  },
+  "datasetFingerprint": "119c857b08aa1aece0cc8fd3941595485459f2398fadfb8ca60ac8f8687ac49d",
+  "promptVersion": "yanxing-eval-v0.3",
+  "policyVersion": "v0.2",
+  "split": "dev",
+  "selectedCaseIds": [
+    "v0_1_persona_response_001"
+  ],
+  "totalCases": 1,
+  "completedCases": 1,
+  "failedCases": 0,
+  "scoring": "not-run",
+  "note": "This artifact records one candidate run. It does not rank providers or select a production model."
+}

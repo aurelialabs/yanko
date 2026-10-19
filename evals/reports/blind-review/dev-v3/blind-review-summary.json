@@ -1,0 +1,16 @@
+{
+  "reviewId": "blind-d4177c05-8397-4233-853c-04e78d33fc64",
+  "generatedAt": "2026-09-03T10:36:47.570Z",
+  "packetFingerprint": "30a33bbe65f1fc4546e2d7f8582ddb617f7df1ad06daedbf377f4d4ddbba81ca",
+  "datasetFingerprint": "119c857b08aa1aece0cc8fd3941595485459f2398fadfb8ca60ac8f8687ac49d",
+  "promptVersion": "yanxing-eval-v0.3",
+  "policyVersion": "v0.2",
+  "dataClassification": "synthetic-dev-only",
+  "generationThreeWayItems": 6,
+  "generationThreeWayOptionsPerItem": 3,
+  "safetyItems": 3,
+  "safetyOptionsPerItem": 2,
+  "annotatorCount": 2,
+  "unblinding": "local-git-ignored-map",
+  "note": "Candidate identity, provider, model, run ID, source case ID, and report path are absent from public artifacts."
+}

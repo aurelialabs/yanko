@@ -1,0 +1,77 @@
+{
+  "reviewId": "blind-d4177c05-8397-4233-853c-04e78d33fc64",
+  "recordedOn": "2026-09-04",
+  "sourceAnalysis": {
+    "path": "evals/reports/blind-review/dev-v3/blind-review-results.json",
+    "sha256": "1800a6515f756805ace06be73ea570583d3976ae40e0221ee3f21c0993f19036",
+    "packetFingerprint": "30a33bbe65f1fc4546e2d7f8582ddb617f7df1ad06daedbf377f4d4ddbba81ca"
+  },
+  "adjudicationSource": {
+    "type": "independent_third_annotator_relayed_by_user",
+    "independenceAttestation": "confirmed_by_user",
+    "blindStatusAttestation": "confirmed_by_user",
+    "attestationText": "确认：G002/B 和 G003/B 来自未查看解盲结果及 A/B 评分的独立第三位标注者。",
+    "note": "The user confirmed that both choices came from an independent third annotator who had not viewed the unblinded result or annotator A/B scores."
+  },
+  "choices": [
+    {
+      "reviewItemId": "G002",
+      "sourceCaseId": "v0_1_persona_response_002",
+      "selectedLabel": "B",
+      "resolvedCandidate": {
+        "providerId": "minimax",
+        "modelId": "MiniMax-M3"
+      }
+    },
+    {
+      "reviewItemId": "G003",
+      "sourceCaseId": "v0_1_emotion_response_007",
+      "selectedLabel": "B",
+      "resolvedCandidate": {
+        "providerId": "deepseek",
+        "modelId": "deepseek-v4-flash"
+      }
+    }
+  ],
+  "resolvedGenerationPreference": {
+    "method": "one_adjudicated_top_choice_per_item",
+    "itemCount": 6,
+    "itemWins": [
+      {
+        "providerId": "deepseek",
+        "modelId": "deepseek-v4-flash",
+        "wins": 3
+      },
+      {
+        "providerId": "minimax",
+        "modelId": "MiniMax-M3",
+        "wins": 3
+      },
+      {
+        "providerId": "alibaba-cloud-dashscope",
+        "modelId": "qwen-turbo",
+        "wins": 0
+      }
+    ],
+    "isTie": true,
+    "twoAnnotatorAverageOverallScores": {
+      "deepseek-v4-flash": 82.83,
+      "MiniMax-M3": 81.83,
+      "qwen-turbo": 75.58
+    }
+  },
+  "safetyPreference": {
+    "status": "unchanged_by_adjudication",
+    "note": "MiniMax-M3 received all six safety top-preference votes against qwen-turbo; DeepSeek had no complete first-run raw safety set."
+  },
+  "conclusion": {
+    "humanGenerationPreferenceWinner": null,
+    "reason": "DeepSeek and MiniMax each won three of the six adjudicated generation items.",
+    "productionModelSelected": false,
+    "remainingBoundaries": [
+      "provider privacy and data-retention review incomplete",
+      "48-case frozen test not run",
+      "structured-output, safety, reliability, latency, and cost gates remain separate"
+    ]
+  }
+}
