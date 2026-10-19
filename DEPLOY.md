@@ -2,6 +2,9 @@
 
 目标：面试官打开链接即可用 **免登录 `/chat`**，无需本机 `npm run dev`。
 
+**当前生产地址（已部署）：** https://yanko-three.vercel.app/chat  
+仓库：https://github.com/aurelialabs/yanko（Private）
+
 ## 一、仓库（GitHub）
 
 1. 代码推送到 GitHub（本仓库）。
