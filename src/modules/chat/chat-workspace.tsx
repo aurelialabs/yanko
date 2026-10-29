@@ -862,7 +862,7 @@ export function ChatWorkspace({
                 if (entry.id === "pending-memory" && session.pendingMemory) {
                   return (
                     <article className="plan-suggestion" key={entry.id}>
-                      <p className="caption">可以记住</p>
+                      <p className="caption">可以记住 · 仅当前角色可见</p>
                       <p>
                         <strong>{session.pendingMemory}</strong>
                       </p>
@@ -882,8 +882,8 @@ export function ChatWorkspace({
                                 id: `demo-memory-${crypto.randomUUID()}`,
                                 content,
                                 category: "agreement",
-                                scope: "user_shared",
-                                roleId: null,
+                                scope: "role_private",
+                                roleId: roleKey,
                               },
                             ],
                           }));
