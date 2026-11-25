@@ -15,6 +15,14 @@ const ids = {
 
 describe("getSafeNextPath", () => {
   it("keeps approved in-app destinations", () => {
+    expect(getSafeNextPath("/onboarding")).toBe("/onboarding");
+    expect(getSafeNextPath("/onboarding?step=role#selection")).toBe(
+      "/onboarding?step=role#selection",
+    );
+    expect(getSafeNextPath("/install")).toBe("/install");
+    expect(getSafeNextPath("/install?source=onboarding#ios")).toBe(
+      "/install?source=onboarding#ios",
+    );
     expect(getSafeNextPath("/plan?scope=week")).toBe("/plan?scope=week");
     expect(getSafeNextPath(`/plan/${ids.plan}#details`)).toBe(
       `/plan/${ids.plan}#details`,
@@ -41,6 +49,24 @@ describe("getSafeNextPath", () => {
     expect(getSafeNextPath("/admin/badcases/not-a-uuid")).toBe("/chat");
   });
 
+  it.each([undefined, null, ""])("keeps /chat as the default for %s", (value) => {
+    expect(getSafeNextPath(value)).toBe("/chat");
+  });
+
+  it.each([
+    "/onboarding/",
+    "/onboarding/role",
+    "/onboarding-extra",
+    "/onboarding/%2Fextra",
+    "/install/",
+    "/install/ios",
+    "/install-extra",
+    "/install/%2Fextra",
+  ])("rejects non-leaf onboarding/install destination %s", (value) => {
+    expect(isAllowedAppPath(value)).toBe(false);
+    expect(getSafeNextPath(value)).toBe("/chat");
+  });
+
   it("protects nested plan and role routes optimistically", () => {
     expect(isProtectedAppPath(`/plan/${ids.plan}`)).toBe(true);
     expect(isProtectedAppPath("/roles/new")).toBe(true);
@@ -56,6 +82,8 @@ describe("getSafeNextPath", () => {
   });
 
   it("allows only recognized leaf routes as post-auth destinations", () => {
+    expect(isAllowedAppPath("/onboarding")).toBe(true);
+    expect(isAllowedAppPath("/install")).toBe(true);
     expect(isAllowedAppPath(`/plan/${ids.plan}`)).toBe(true);
     expect(isAllowedAppPath(`/roles/${ids.role}/edit`)).toBe(true);
     expect(isAllowedAppPath("/admin/badcases")).toBe(true);

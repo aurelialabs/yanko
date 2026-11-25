@@ -700,16 +700,7 @@ export function ChatWorkspace({
                 {role.name} ⌄
               </h1>
               <p className="role-meta">
-                {role.label} ·{" "}
-                {chatWorkspace.source === "unavailable"
-                  ? "服务不可用"
-                  : chatWorkspace.source === "demo"
-                    ? "MiniMax 演示"
-                    : chatWorkspace.runtimeMode === "minimax-development"
-                      ? "MiniMax-M3 开发模式"
-                      : chatWorkspace.runtimeMode === "mock"
-                        ? "本地 Mock"
-                        : "运行模式不可用"}
+                {role.label}
               </p>
             </span>
           </Link>

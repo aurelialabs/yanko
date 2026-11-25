@@ -1,8 +1,10 @@
 import type { Metadata, Route } from "next";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 import { getSafeNextPath } from "@/lib/auth/redirect";
 import { getAuthContext } from "@/lib/auth/session";
+import { hasCompletedOnboarding } from "@/lib/auth/onboarding";
 
 import { LoginForm } from "./login-form";
 
@@ -33,10 +35,12 @@ export default async function LoginPage({
   }>;
 }) {
   const query = await searchParams;
-  const nextPath = getSafeNextPath(firstQueryValue(query.next));
+  const nextPath = getSafeNextPath(firstQueryValue(query.next) || "/onboarding");
   const auth = await getAuthContext();
 
   if (auth.configured && auth.user) {
+    if (nextPath === "/onboarding" && (await hasCompletedOnboarding(auth.user)))
+      redirect("/");
     redirect(nextPath as Route);
   }
 
@@ -46,10 +50,6 @@ export default async function LoginPage({
   return (
     <main className="auth-page">
       <section className="auth-device" aria-labelledby="login-title">
-        <div className="mobile-status" aria-hidden="true">
-          <span>9:41</span>
-          <span>● ◔ ▰</span>
-        </div>
         <div className="auth-content">
           <div className="brand-mark" aria-hidden="true">
             言
@@ -65,7 +65,9 @@ export default async function LoginPage({
             initialNotice={notice ? loginNoticeMessages[notice] : undefined}
             nextPath={nextPath}
           />
-          <p className="legal-copy">继续即代表你同意《用户协议》和《隐私政策》</p>
+          <Link className="auth-back-link" href="/">
+            返回 Yanko
+          </Link>
         </div>
       </section>
     </main>

@@ -1,5 +1,8 @@
 const exactAppPaths = new Set([
   "/chat",
+  // These are leaf destinations; nested onboarding/install paths stay blocked.
+  "/onboarding",
+  "/install",
   "/plan",
   "/me",
   "/me/memories",

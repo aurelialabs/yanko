@@ -1,0 +1,183 @@
+/* Imported by the root PWA client so safe areas apply on every app route. */
+@media (max-width: 1199px) {
+  .environment > .app-shell {
+    height: var(--yanko-viewport-height, 100dvh);
+    min-height: var(--yanko-viewport-height, 100dvh);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+
+  .app-shell > .mobile-bottom-nav {
+    right: env(safe-area-inset-right, 0px);
+    left: env(safe-area-inset-left, 0px);
+    height: calc(74px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .app-shell .app-stage > .page-content {
+    height: calc(100% - 74px - env(safe-area-inset-bottom, 0px));
+  }
+
+  .auth-page > .auth-device {
+    min-height: var(--yanko-viewport-height, 100dvh);
+    height: auto;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+
+  /* Safari zooms focused controls smaller than 16px. */
+  .app-shell input,
+  .app-shell textarea,
+  .app-shell select,
+  .auth-device input,
+  .auth-device textarea,
+  .auth-device select {
+    font-size: max(16px, 1rem);
+  }
+}
+
+@media (display-mode: standalone) {
+  html,
+  body {
+    background: var(--yanko-color-surface-app);
+  }
+}
+
+@media (display-mode: standalone) and (max-width: 1199px) {
+  /* iOS supplies the real clock and status icons above the safe area. */
+  .app-shell .app-stage > .mobile-status,
+  .auth-device > .mobile-status {
+    display: none;
+  }
+
+  .app-shell .app-stage > .page-content {
+    height: calc(100% - 74px - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.pwa-offline-notice[role="status"] {
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  left: calc(12px + env(safe-area-inset-left, 0px));
+}
+
+.pwa-install-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(24px + env(safe-area-inset-top, 0px))
+    calc(20px + env(safe-area-inset-right, 0px))
+    calc(32px + env(safe-area-inset-bottom, 0px))
+    calc(20px + env(safe-area-inset-left, 0px));
+  background: var(--yanko-color-surface-app);
+}
+
+.pwa-install-content {
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.pwa-install-back {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--yanko-color-text-secondary);
+  font-size: 13px;
+}
+
+.pwa-install-header {
+  margin: 20px 0 28px;
+}
+
+.pwa-install-icon {
+  border-radius: 20px;
+  box-shadow: var(--yanko-shadow-card);
+}
+
+.pwa-install-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 6vw, 32px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.pwa-install-card p {
+  margin: 0;
+  color: var(--yanko-color-text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.pwa-install-card {
+  border: 1px solid var(--yanko-color-border-default);
+  border-radius: 24px;
+  padding: 24px;
+  background: var(--yanko-color-surface-card);
+}
+
+.pwa-install-card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pwa-install-steps {
+  display: grid;
+  gap: 24px;
+  margin: 24px 0 0;
+  padding-left: 24px;
+  list-style: decimal;
+}
+
+.pwa-install-steps li {
+  padding-left: 6px;
+}
+
+.pwa-install-steps li::marker {
+  color: var(--yanko-color-text-secondary);
+  font-weight: 700;
+}
+
+.pwa-install-steps strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.pwa-install-steps svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.pwa-install-continue {
+  margin-top: 24px;
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  padding: 12px 20px;
+  background: var(--yanko-color-text-primary);
+  color: var(--yanko-color-surface-card);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (min-width: 760px) {
+  .pwa-offline-notice[role="status"] {
+    right: calc(24px + env(safe-area-inset-right, 0px));
+    left: auto;
+    width: min(
+      420px,
+      calc(
+        100vw - 48px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)
+      )
+    );
+  }
+}

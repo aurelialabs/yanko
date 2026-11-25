@@ -191,7 +191,7 @@ button {
 }
 
 .page-content {
-  height: calc(100% - 44px - 74px);
+  height: calc(100% - 74px);
   min-height: 0;
   overflow-y: auto;
   padding-bottom: 16px;
@@ -1016,6 +1016,18 @@ button {
   text-align: center;
   font-size: 11px;
   line-height: 16px;
+}
+
+.auth-back-link {
+  margin: 0;
+  color: var(--yanko-color-text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.auth-content > .auth-subtitle {
+  font-size: 16px;
+  line-height: 26px;
 }
 
 .success-note {

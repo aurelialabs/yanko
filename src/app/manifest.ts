@@ -3,10 +3,10 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "言行",
-    short_name: "言行",
+    name: "Yanko · 言行",
+    short_name: "Yanko",
     description: "一个能持续理解你、陪你聊天，也帮你把想法变成行动的 AI 伙伴。",
-    start_url: "/chat",
+    start_url: "/",
     scope: "/",
     display: "standalone",
     background_color: "#F5F3F9",
@@ -15,15 +15,15 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["productivity", "lifestyle"],
     icons: [
       {
-        src: "/pwa/icon-192.svg",
+        src: "/icons/icon-192.png",
         sizes: "192x192",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "any",
       },
       {
-        src: "/pwa/icon-512.svg",
+        src: "/icons/icon-512.png",
         sizes: "512x512",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "any",
       },
     ],

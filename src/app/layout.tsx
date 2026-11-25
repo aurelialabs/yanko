@@ -12,6 +12,20 @@ export const metadata: Metadata = {
     template: "%s · 言行",
   },
   description: "一个能持续理解你、陪你聊天，也帮你把想法变成行动的 AI 伙伴。",
+  applicationName: "Yanko · 言行",
+  icons: {
+    icon: "/icons/icon-192.png",
+    apple: [
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Yanko",
+    statusBarStyle: "default",
+  },
+  formatDetection: { telephone: false },
+  other: { "apple-mobile-web-app-capable": "yes" },
 };
 
 export const viewport: Viewport = {

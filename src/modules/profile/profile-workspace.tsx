@@ -352,7 +352,11 @@ export function ProfileWorkspace({
                   </button>
                 ),
               )}
-              <small className="profile-version">V0.1.0 · Web/PWA</small>
+              <Link className="profile-settings-item" href="/install">
+                <span className="profile-settings-icon" aria-hidden="true">↗</span>
+                <span><strong>添加到手机主屏幕</strong><small>在 iPhone 上随时打开 Yanko</small></span>
+                <i aria-hidden="true">›</i>
+              </Link>
             </nav>
 
             {activePanel === "privacy" ? (

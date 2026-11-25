@@ -24,10 +24,6 @@ export function AppShell({
       <div className="app-shell">
         <DesktopNavigation current={current} roles={roles} viewer={viewer} />
         <div className="app-stage">
-          <div className="mobile-status" aria-hidden="true">
-            <span>9:41</span>
-            <span>● ◔ ▰</span>
-          </div>
           <div className="page-content">{children}</div>
         </div>
         <MobileNavigation current={current} />
