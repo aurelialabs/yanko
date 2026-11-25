@@ -1047,6 +1047,9 @@ export function ChatWorkspace({
                   : "今天可以先从照顾自己开始。"}
               </p>
             </div>
+            <Link className="chat-today-link" href="/plan">
+              查看全部计划 <span aria-hidden="true">↗</span>
+            </Link>
           </aside>
 
           <div className="chat-composer-area">
