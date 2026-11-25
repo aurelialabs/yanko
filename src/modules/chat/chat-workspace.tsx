@@ -737,10 +737,6 @@ export function ChatWorkspace({
               <p className="chat-runtime-note">
                 本地 Mock 对话：消息会保存，但回复不是由真实模型生成。
               </p>
-            ) : chatWorkspace.source === "demo" ? (
-              <p className="chat-runtime-note">
-                免登录演示：回复由 MiniMax-M3 按你的话生成，对话会留在这台浏览器里。
-              </p>
             ) : null}
             {hasMore ? (
               <button

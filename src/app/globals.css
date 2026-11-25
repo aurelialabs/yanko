@@ -2874,9 +2874,11 @@ button.plan-subgoal-check {
 @media (min-width: 1200px) {
   .chat-page {
     min-height: 100%;
-    background:
-      radial-gradient(700px 420px at 0% 100%, rgb(190 200 249 / 22%), transparent 72%),
-      var(--yanko-color-surface-app);
+    background: var(--yanko-color-surface-card);
+  }
+
+  .chat-page::before {
+    display: none;
   }
 
   .chat-header {
@@ -2919,24 +2921,22 @@ button.plan-subgoal-check {
 
   .chat-workspace {
     display: grid;
-    width: min(100%, 1320px);
+    width: 100%;
     min-height: 0;
     flex: 1;
     grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
     grid-template-rows: minmax(0, 1fr) auto;
-    column-gap: 20px;
-    row-gap: 0;
-    margin: 0 auto;
-    padding: 24px clamp(24px, 3vw, 44px) 28px;
+    gap: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .conversation {
     grid-column: 1;
     grid-row: 1;
     gap: 18px;
-    border: 1px solid var(--yanko-color-border-default);
-    border-bottom: 0;
-    border-radius: 24px 24px 0 0;
+    border: 0;
+    border-radius: 0;
     padding: 24px clamp(22px, 3vw, 42px) 18px;
     background: var(--yanko-color-surface-card);
   }
@@ -2998,12 +2998,14 @@ button.plan-subgoal-check {
     grid-column: 2;
     grid-row: 1 / span 2;
     flex-direction: column;
-    align-self: start;
-    border: 1px solid var(--yanko-color-border-default);
-    border-radius: 24px;
+    align-self: stretch;
+    overflow-y: auto;
+    border: 0;
+    border-left: 1px solid var(--yanko-color-border-default);
+    border-radius: 0;
     padding: 24px;
     background: var(--yanko-color-surface-card);
-    box-shadow: var(--yanko-shadow-card);
+    box-shadow: none;
   }
 
   .chat-today-card header h2 {
@@ -3120,9 +3122,9 @@ button.plan-subgoal-check {
     width: 100%;
     grid-column: 1;
     grid-row: 2;
-    border: 1px solid var(--yanko-color-border-default);
+    border: 0;
     border-top: 1px solid var(--yanko-color-surface-app);
-    border-radius: 0 0 24px 24px;
+    border-radius: 0;
     background: var(--yanko-color-surface-card);
   }
 
